@@ -34,8 +34,13 @@ src/
 │   ├── page.js             # Home page
 │   ├── globals.css         # Global styles, CSS variables, Tailwind imports
 │   ├── SmoothScroll.jsx    # Lenis smooth scroll provider (client component)
-│   ├── [slug]/             # Route pages (about, services, ai-calling-agents, etc.)
-│   └── blog/               # Blog section
+│   ├── about/             # About page
+│   ├── services/          # Services page
+│   ├── ai-calling-agents/ # AI Calling Agents service page
+│   ├── ai-chatbots/       # AI Chatbots service page
+│   ├── website-development/ # Website Development service page
+│   ├── digital-marketing/ # Digital Marketing service page
+│   └── blog/              # Blog section and posts
 └── components/             # React components
     ├── navbar.jsx          # Navigation with mega menu
     ├── hero.jsx            # Hero section with animations
@@ -47,6 +52,7 @@ src/
     ├── button.jsx          # Reusable button
     ├── countup.jsx         # Animated counter
     ├── ChatbotWidget.jsx   # N8N chat widget
+    ├── book-calcom.jsx     # Cal.com booking floating button
     ├── FluidHeader.jsx     # Animated header text effects
     ├── GlassOrchestra.jsx  # Glass morphism utilities
     └── ui/                 # shadcn/ui components
@@ -87,25 +93,27 @@ import "@/app/globals.css";
 - Pages in `src/app/` are server components by default (add `"use client"` when needed)
 
 ### Animation Stack
-- **Lenis**: Smooth scrolling (initialized in SmoothScroll.jsx)
-- **framer-motion**: Page/component animations and transitions
+- **Lenis**: Smooth scrolling (initialized in SmoothScroll.jsx with duration: 1.2s, lerp: 0.1)
+- **framer-motion** (imported as `motion/react`): Page/component animations and transitions
+  - `FluidHeader.jsx` - Word-by-word text reveal animation with staggered delays
+  - `GlassOrchestra.jsx` - Ambient background glows and floating glass blobs
 - **GSAP**: Complex timeline-based animations
-- Components like `FluidHeader.jsx` and `GlassOrchestra.jsx` contain animation utilities
+- `tw-animate-css`: Additional CSS animation utilities
 
 ### Global Providers (in layout.js)
 - `<Navbar />` - Site navigation
-- `<BookCal />` - Cal.com booking integration
+- `<BookCal />` - Cal.com booking integration (floating button, namespace: "30min", calLink: "syenxa-tech/30min")
 - `<SmoothScroll />` - Lenis smooth scroll provider
 
 ### SEO
 - Comprehensive metadata in `src/app/layout.js` including OpenGraph, Twitter cards
-- Structured data (JSON-LD) for Organization schema
-- Robots.txt configured in `src/app/robots.js`
+- Structured data (JSON-LD) for Organization schema embedded in layout
+- Organization name: "Syenxa Tech", URL: https://syenxatech.com
 
 ### N8N Chat Integration
 The chatbot widget (`ChatbotWidget.jsx`) connects to an N8N webhook:
-- Webhook URL is hardcoded in the component
-- Runs in "window" mode (bottom-right corner)
+- Webhook URL: `https://n8n.srv929626.hstgr.cloud/webhook/314ce18e-efe9-487c-ab35-4fc2cd673762/chat`
+- Runs in "window" mode (bottom-right corner, fixed positioning)
 - CSS is imported in the root layout (`@n8n/chat/style.css`)
 
 ## Tailwind CSS v4 Notes
@@ -120,5 +128,8 @@ This project uses Tailwind CSS v4 beta. Key differences:
 
 - Configured in `components.json`
 - Style variant: "new-york"
-- Path aliases match project structure
+- Uses `motion` package (alias for framer-motion) for animations
+- Path aliases defined: `@/components`, `@/lib/utils`, `@/components/ui`
+- Custom registry configured: `@spectrumui` at https://ui.spectrumhq.in/r/{name}.json
+- Utility functions for class merging in `src/lib/utils.js` (uses `clsx` and `tailwind-merge`)
 - Add new components: use shadcn CLI or manual copy to `src/components/ui/`

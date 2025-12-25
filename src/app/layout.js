@@ -5,6 +5,7 @@ import "@n8n/chat/style.css";
 import Navbar from "@/components/navbar";
 import BookCal from "@/components/book-calcom";
 import SmoothScroll from "./SmoothScroll";
+import PageTransitionProvider from "@/components/page-transition";
 
 const poppins = Poppins({
     subsets: ["latin"],
@@ -120,7 +121,19 @@ export default function RootLayout({ children }) {
                 <Navbar />
                 <BookCal />
                 <SmoothScroll />
-                {children}
+                <PageTransitionProvider
+                    config={{
+                        // Fast, smooth transitions
+                        color: "var(--primary-color)",
+                        direction: "right",
+                        durationIn: 0.3,
+                        holdDuration: 0.1,
+                        durationOut: 0.3,
+                        enabled: true,
+                    }}
+                >
+                    {children}
+                </PageTransitionProvider>
             </body>
         </html>
     );
