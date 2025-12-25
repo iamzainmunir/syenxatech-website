@@ -84,7 +84,7 @@ const Hero = () => {
                         <div className="size-64 bg-[#ff541f]/20 blur-[80px] rounded-full animate-pulse" />
 
                         {/* Client avatars stack */}
-                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center -space-x-4">
+                        <div className="absolute top-1/2   left-1/2 -translate-x-1/2 sm:-translate-y-1/2 translate-y-1/2 flex items-center -space-x-4">
                             {[1, 2, 3, 4, 5].map((i) => (
                                 <motion.img
                                     key={i}
