@@ -56,6 +56,7 @@ const Navbar = () => {
 
     const navLinks = [
         { name: "Home", href: "/" },
+        { name: "Use Cases", href: "/use-cases" },
         { name: "Blog", href: "/blog" },
         { name: "About", href: "/about" },
         { name: "FAQ", href: "/#faqs" },
