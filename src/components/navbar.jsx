@@ -218,7 +218,7 @@ const Navbar = () => {
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0 }}
-                            className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[-1]"
+                            className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[-1] pointer-events-auto top-0 left-0 h-screen w-screen"
                             onClick={() => setOpen(false)}
                         />
                         <motion.div
@@ -230,20 +230,27 @@ const Navbar = () => {
                                 damping: 25,
                                 stiffness: 200,
                             }}
-                            className="absolute top-0 right-0 h-screen w-[300px] bg-zinc-950 border-l border-white/10 p-8 shadow-2xl pointer-events-auto"
+                            className="absolute top-0 right-0 h-screen w-[300px] bg-zinc-950 border-l border-white/10 p-8 shadow-2xl pointer-events-auto overflow-y-auto"
                         >
-                            <div className="flex flex-col h-full">
-                                <Link
-                                    href="/"
-                                    className="mb-12"
-                                    onClick={() => setOpen(false)}
-                                >
-                                    <img
-                                        src="/logo.svg"
-                                        alt="Logo"
-                                        className="h-10"
-                                    />
-                                </Link>
+                            <div className="flex flex-col h-full relative">
+                                <div className="flex justify-between items-center mb-12">
+                                    <Link
+                                        href="/"
+                                        onClick={() => setOpen(false)}
+                                    >
+                                        <img
+                                            src="/logo.svg"
+                                            alt="Syenxa Tech Logo"
+                                            className="h-10 w-auto"
+                                        />
+                                    </Link>
+                                    <button
+                                        onClick={() => setOpen(false)}
+                                        className="p-2 bg-white/5 rounded-full text-white hover:bg-white/20 transition-colors"
+                                    >
+                                        <X size={20} />
+                                    </button>
+                                </div>
 
                                 <ul className="flex flex-col gap-6">
                                     {navLinks.map((link, i) => (
