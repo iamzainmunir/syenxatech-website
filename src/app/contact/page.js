@@ -11,19 +11,46 @@ import {
     Linkedin,
     Twitter,
     Instagram,
+    Facebook,
     CheckCircle2,
 } from "lucide-react";
 
+const iconMap = {
+    Facebook: Facebook,
+    Instagram: Instagram,
+    Linkedin: Linkedin,
+    Twitter: Twitter,
+};
+import {useForm} from "@formspree/react"
+
 export default function ContactPage() {
     const [formState, setFormState] = useState("idle"); // idle, submitting, success
+    const [state, handleSubmit] = useForm("mjkjzeja")
+    const socialMedia = [
+        {
+            name: "facebook",
+            icon: "Facebook",
+            url: "https://www.facebook.com/people/SyenxaTech/61584113090992/#",
+        }, {
+            name: "instagram",
+            icon: "Instagram",
+            url: "https://www.instagram.com/syenxatech/",
+        
+        }, {
+            name: "linkedin",
+            icon: "Linkedin",
+            url: "https://www.linkedin.com/company/syenxatech",
+        },
+    ]
 
-    const handleSubmit = (e) => {
+    const HandleFormSubmit = (e) => {
         e.preventDefault();
         setFormState("submitting");
         // Simulate sending
         setTimeout(() => {
             setFormState("success");
         }, 1500);
+        handleSubmit(e);
     };
 
     return (
@@ -96,15 +123,20 @@ export default function ContactPage() {
                     </div>
 
                     <div className="flex gap-4">
-                        {[Instagram, Linkedin, Twitter].map((Icon, i) => (
-                            <a
-                                key={i}
-                                href="#"
-                                className="p-3 rounded-full bg-white/5 border border-white/10 text-white hover:bg-white hover:text-black transition-all duration-300"
-                            >
-                                <Icon size={20} />
-                            </a>
-                        ))}
+                        {socialMedia.map((social, i) => {
+                            const Icon = iconMap[social.icon];
+                            return (
+                                <a
+                                    key={i}
+                                    href={social.url}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="p-3 rounded-full bg-white/5 border border-white/10 text-white hover:bg-white hover:text-black transition-all duration-300"
+                                >
+                                    <Icon size={20} />
+                                </a>
+                            );
+                        })}
                     </div>
                 </motion.div>
 
@@ -141,9 +173,9 @@ export default function ContactPage() {
                             </div>
                         ) : (
                             <form
-                                action={"https://formspree.io/f/mjkjzeja"}
+                                action="https://formspree.io/f/mjkjzeja"
                                 method="POST"
-                                onSubmit={handleSubmit}
+                                onSubmit={HandleFormSubmit}
                                 className="space-y-6"
                             >
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -153,6 +185,7 @@ export default function ContactPage() {
                                         </label>
                                         <input
                                             type="text"
+                                            name="Name"
                                             required
                                             className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#ff541f] focus:bg-white/10 transition-all placeholder:text-white/20"
                                             placeholder="John Doe"
@@ -164,6 +197,7 @@ export default function ContactPage() {
                                         </label>
                                         <input
                                             type="email"
+                                            name="Email"
                                             required
                                             className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#ff541f] focus:bg-white/10 transition-all placeholder:text-white/20"
                                             placeholder="john@example.com"
@@ -175,7 +209,7 @@ export default function ContactPage() {
                                     <label className="text-xs font-mono uppercase tracking-wider text-white/50">
                                         Internet
                                     </label>
-                                    <select className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#ff541f] focus:bg-white/10 transition-all appearance-none cursor-pointer">
+                                    <select name="Service" className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#ff541f] focus:bg-white/10 transition-all appearance-none cursor-pointer">
                                         <option className="bg-[#0a0a0a]">
                                             AI Automation & Agents
                                         </option>
@@ -199,6 +233,7 @@ export default function ContactPage() {
                                         Message
                                     </label>
                                     <textarea
+                                    name="Message"
                                         required
                                         rows={4}
                                         className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#ff541f] focus:bg-white/10 transition-all placeholder:text-white/20 resize-none"
