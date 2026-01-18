@@ -145,7 +145,7 @@ export default function RootLayout({ children }) {
                             sameAs: [
                                 "https://www.linkedin.com/company/syenxatech",
                                 "https://www.instagram.com/syenxatech",
-                                "https://www.facebook.com/syenxatech",
+                                "https://www.facebook.com/people/SyenxaTech/61584113090992/#",
                             ],
                             description:
                                 "Syenxa Tech provides cutting-edge AI Calling Agents and automation solutions to help businesses worldwide scale effortlessly.",
