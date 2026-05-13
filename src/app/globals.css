@@ -6,7 +6,10 @@
   html,
   body {
     height: auto;
-    overscroll-behavior: none;
+    min-height: 100%;
+    overscroll-behavior-x: none;
+    overscroll-behavior-y: auto;
+    touch-action: pan-y;
   }
 }
 
